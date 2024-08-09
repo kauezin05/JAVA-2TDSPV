@@ -1,4 +1,4 @@
-package br.com.fiap.aula04.exercicio.model.blog;
+package br.com.fiap.aula04.exercicio.model;
 
 import br.com.fiap.aula04.exercicio.dto.post.AtualizacaoPostDto;
 import br.com.fiap.aula04.exercicio.dto.post.CadastroPostDto;
@@ -13,7 +13,6 @@ import java.util.Set;
 
 @Getter @Setter
 @NoArgsConstructor
-
 @Entity
 @Table(name="TB_POST")
 public class Post {
@@ -23,37 +22,34 @@ public class Post {
     @Column(name="cd_post")
     private Long id;
 
-    @Column(name="ds_titulo", nullable = false, length = 50)
-    private String titulo;
-
-    @Column(name = "ds_conteudo", nullable = false, length = 500)
-    private String conteudo;
-
-    @ManyToMany
-    @JoinTable(name="TB_TAG_POST",
-        joinColumns = @JoinColumn(name="cd_post"),
-        inverseJoinColumns = @JoinColumn(name="cd_tag"))
+    @ManyToMany(mappedBy = "posts")
     private Set<Tag> tags = new HashSet<>();
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<Comentario> comentarios;
 
     @OneToOne(mappedBy = "post", cascade = CascadeType.ALL)
     private DetalhesPost detalhes;
 
-    public Post(CadastroPostDto dto){
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<Comentario> comentarios;
+
+    @Column(name="ds_titulo", nullable = false, length = 50)
+    private String titulo;
+
+    @Column(name="ds_conteudo", nullable = false, length = 500)
+    private String conteudo;
+
+    public Post(CadastroPostDto dto) {
         titulo = dto.titulo();
         conteudo = dto.conteudo();
         detalhes = new DetalhesPost(dto);
-        detalhes.setPost(this); //seta a FK da relação
+        detalhes.setPost(this); //Setando a FK do banco
     }
 
     public void atualizar(AtualizacaoPostDto dto) {
-        if (dto.titulo() != null){
+        if (dto.titulo() != null)
             this.titulo = dto.titulo();
-        }
-        if (dto.autor() != null){
+        if (dto.conteudo() != null)
+            this.conteudo = dto.conteudo();
+        if (dto.autor() != null)
             this.detalhes.setAutor(dto.autor());
-        }
     }
 }

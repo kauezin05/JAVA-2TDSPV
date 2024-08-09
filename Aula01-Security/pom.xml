@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.fiap.aula04</groupId>
-	<artifactId>Aula01</artifactId>
+	<artifactId>exercicio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>exercicio</name>
-	<description>Exercício de Relacionamentos</description>
+	<description>Exercício de relacionamentos</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -60,6 +60,13 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.4.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

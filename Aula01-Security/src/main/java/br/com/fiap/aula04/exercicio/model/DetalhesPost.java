@@ -1,6 +1,7 @@
-package br.com.fiap.aula04.exercicio.model.blog;
+package br.com.fiap.aula04.exercicio.model;
 
 import br.com.fiap.aula04.exercicio.dto.post.CadastroPostDto;
+import br.com.fiap.aula04.exercicio.dto.post.DetalhesPostDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,11 +10,12 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="TB_DETALHES_POST")
+@Table(name = "TB_DETALHES_POST")
 @EntityListeners(AuditingEntityListener.class)
 public class DetalhesPost {
 
@@ -22,19 +24,19 @@ public class DetalhesPost {
     @Column(name="cd_detalhes_post")
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "cd_post", nullable = false)
+    private Post post;
+
     @Column(name="nm_autor", nullable = false, length = 50)
     private String autor;
 
     @CreatedDate
-    @Column(name="dt_criacao", nullable = false)
+    @Column(name = "dt_criacao", nullable = false)
     private LocalDateTime dataCriacao;
 
-    @Column(name="dt_publicacao", nullable = false)
+    @Column(name = "dt_publicacao", nullable = false)
     private LocalDateTime dataPublicacao;
-
-    @OneToOne
-    @JoinColumn(name="cd_post", nullable = false, unique = true)
-    private Post post;
 
     public DetalhesPost(CadastroPostDto dto){
         autor = dto.autor();

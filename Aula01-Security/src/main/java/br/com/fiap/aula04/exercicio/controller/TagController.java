@@ -2,7 +2,6 @@ package br.com.fiap.aula04.exercicio.controller;
 
 import br.com.fiap.aula04.exercicio.dto.tag.CadastroTagDto;
 import br.com.fiap.aula04.exercicio.dto.tag.DetalhesTagDto;
-import br.com.fiap.aula04.exercicio.model.blog.Tag;
 import br.com.fiap.aula04.exercicio.repository.TagRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+import br.com.fiap.aula04.exercicio.model.Tag;
 
 @RestController
 @RequestMapping("tags")
